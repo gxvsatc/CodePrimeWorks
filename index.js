@@ -1,8 +1,17 @@
-function minDepth(root) {
-  if (!root) return 0;
-  if (!root.left && !root.right) return 1;
-  let min = Infinity;
-  if (root.left) min = Math.min(min, minDepth(root.left));
-  if (root.right) min = Math.min(min, minDepth(root.right));
-  return min + 1;
+function sortedListToBST(head) {
+  if (!head) return null;
+  if (!head.next) return new TreeNode(head.val);
+  let slow = head;
+  let fast = head;
+  let prev = null;
+  while (fast && fast.next) {
+    prev = slow;
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  const root = new TreeNode(slow.val);
+  prev.next = null;
+  root.left = sortedListToBST(head);
+  root.right = sortedListToBST(slow.next);
+  return root;
 }
