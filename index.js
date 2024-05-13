@@ -1,10 +1,9 @@
-const factorial = (n) => {
-  if (n === 0 || n === 1) {
-    return 1;
-  }
-  let result = 1;
-  for (let i = 2; i <= n; i++) {
-    result *= i;
-  }
-  return result;
+const pullAtIndex = (arr, pullArr) => {
+  let removed = [];
+  let pulled = arr
+    .map((v, i) => (pullArr.includes(i) ? removed.push(v) : v))
+    .filter((v, i) => !pullArr.includes(i));
+  arr.length = 0;
+  pulled.forEach((v) => arr.push(v));
+  return removed;
 };
