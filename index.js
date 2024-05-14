@@ -1,9 +1,19 @@
-const pullAtIndex = (arr, pullArr) => {
-  let removed = [];
-  let pulled = arr
-    .map((v, i) => (pullArr.includes(i) ? removed.push(v) : v))
-    .filter((v, i) => !pullArr.includes(i));
-  arr.length = 0;
-  pulled.forEach((v) => arr.push(v));
-  return removed;
-};
+function rotateRight(head, k) {
+  if (!head) return null;
+  let length = 1;
+  let tail = head;
+  while (tail.next) {
+    length++;
+    tail = tail.next;
+  }
+  k %= length;
+  if (k === 0) return head;
+  let newTail = head;
+  for (let i = 0; i < length - k - 1; i++) {
+    newTail = newTail.next;
+  }
+  const newHead = newTail.next;
+  newTail.next = null;
+  tail.next = head;
+  return newHead;
+}
